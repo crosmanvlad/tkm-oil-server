@@ -1,0 +1,6 @@
+{
+    "mongodbUri": "localhost",
+    "mongodbPort": "27017",
+    "mongodbName": "hu-stats",
+    "apiPath": "/api"
+}

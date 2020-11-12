@@ -1,0 +1,36 @@
+{
+    "name": "tkm-oil-server",
+    "version": "1.0.0",
+    "description": "App desc",
+    "main": "server.js",
+    "config": {
+        "port": "3000"
+    },
+    "scripts": {
+        "dev": "node server.js",
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "url"
+    },
+    "engines": {
+        "node": "8.9.4"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "*",
+        "express": "*",
+        "express-healthcheck": "*",
+        "lodash": "^4.17.20",
+        "mongoose": "*",
+        "randomstring": "^1.1.5",
+        "winston": "^3.3.3"
+    },
+    "devDependencies": {
+        "chai": "*",
+        "mocha": "*"
+    }
+}
