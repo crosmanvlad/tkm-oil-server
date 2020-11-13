@@ -70,7 +70,7 @@ exports.login = async (req, res, next) => {
     const validPassword = await validatePassword(password, user.password);
     if (!validPassword) return next(new Error('Password is not correct'))
     const accessToken = jwt.sign({ userId: user._id }, config.jwtSecret, {
-      expiresIn: "1d"
+      expiresIn: "30m"
     });
     await User.findByIdAndUpdate(user._id, { accessToken })
     res.status(200).json({

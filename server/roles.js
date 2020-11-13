@@ -9,6 +9,8 @@ exports.roles = (function() {
   ac.grant("admin")
     .extend("basic")
     .readAny("collection")
+    .updateAny("collection")
+    .deleteAny("collection")
     .readAny("profile")
     .updateAny("profile")
     .deleteAny("profile")

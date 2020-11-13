@@ -39,6 +39,32 @@ module.exports = {
       logger.error(`400 Bad Request. Request '${req.path}'.`);
       res.sendStatus(400);
     }
+  },
+
+  update: async (req, res) => {
+    const {date, firm, location, anexaNum, quantity} = req.body;
+    const {collectionId} = req.params;
+    try {
+      await Collection.findByIdAndUpdate(collectionId, {date, firm, location, anexaNum, quantity});
+      const collection = await Collection.findById(collectionId);
+      res.send(collection);
+    } catch(err) {
+      logger.error(`Error: ${err}. Stack: ${err.stack}`);
+      return res.sendStatus(500);
+    }
+  },
+
+  delete: async (req, res) => {
+    try {
+      const {collectionId} = req.params;
+      await Collection.findByIdAndDelete(collectionId);
+      res.status(200).json({
+        message: 'Collection has been deleted'
+      });
+    } catch (error) {
+      logger.error(`Error: ${err}. Stack: ${err.stack}`);
+      return res.sendStatus(500);
+    }
   }
 
 };
