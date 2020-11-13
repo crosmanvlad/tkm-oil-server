@@ -6,9 +6,9 @@ const config = require('../config');
 
 // Setup routes
 const router = express.Router();
-require('./gameType')(router);
 require('./healthCheckRouter')(router);
-require('./game')(router);
+require('./user')(router);
+require('./collection')(router);
 
 module.exports = app => {
     

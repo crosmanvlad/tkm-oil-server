@@ -1,6 +1,7 @@
 {
     "mongodbUri": "localhost",
     "mongodbPort": "27017",
-    "mongodbName": "hu-stats",
-    "apiPath": "/api"
+    "mongodbName": "tkm-oil",
+    "apiPath": "/api",
+    "jwtSecret": "%D#3TW&4344$#$@#%WTEWTEAE%$6"
 }

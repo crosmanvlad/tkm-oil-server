@@ -4,6 +4,7 @@ let dbUri;
 let dbName;
 let dbPort;
 let apiPath;
+let jwtSecret;
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -12,16 +13,14 @@ if (env === 'production') {
     dbPort = process.env.MONGO_DB_PORT;
     dbName = process.env.MONGO_DB_NAME;
     apiPath = process.env.API_PATH;
-    awsAccessKeyId = process.env.AWS_ACCESS_KEY_ID;
-    awsSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+    jwtSecret = process.env.JWT_SECRET;
 } else {
     const config = require('./config.json');
     dbUri = config.mongodbUri;
     dbPort = config.mongodbPort;
     dbName = config.mongodbName;
     apiPath = config.apiPath;
-    awsAccessKeyId = config.awsAccessKeyId;
-    awsSecretAccessKey = config.awsSecretAccessKey;
+    jwtSecret = config.jwtSecret;
 }
 
 if (!dbUri || !dbPort || !dbName) {
@@ -39,6 +38,5 @@ module.exports = {
     dbPort,
     dbName,
     apiPath,
-    awsAccessKeyId,
-    awsSecretAccessKey
+    jwtSecret
 };

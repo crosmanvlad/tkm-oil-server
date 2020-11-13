@@ -13,7 +13,7 @@ let connectionAttempts = 0;
 logger.info(`Trying to connect to database: ${config.dbUri}:${config.dbPort}`);
 
 let connect = (callback) => {
-    mongoose.connect(`mongodb://${config.dbUri}:${config.dbPort}/${config.dbName}`).then(
+    mongoose.connect(`mongodb://${config.dbUri}:${config.dbPort}/${config.dbName}`, {useNewUrlParser: true, useUnifiedTopology: true }).then(
         () => {
             connectionAttempts = 0;
             logger.info('Connected to database');
