@@ -8,9 +8,28 @@ module.exports = {
   getAll: (req, res) => {
     const {_q, page, start, end} = req.query;
     const defaultPage = page ? parseInt(page) : 0;
-    const startDate = start ? start : new Date(2020, 10, 8);
-    const endDate = end ? end : new Date();
+    const startDate = start ? new Date(start) : new Date(2019, 10, 8);
+    const endDate = end ? new Date(end) : new Date();
+    startDate.setHours(0,0,0,0);
+    endDate.setHours(23,59,59,999);
     collectionService.find(_q || '', startDate, endDate, defaultPage)
+      .then(response => {
+        logger.info(`200 OK. Request '${req.path}'.`);
+        res.send(response);
+      })
+      .catch(err => {
+        logger.error(`Error: ${err}. Stack: ${err.stack}`);
+        return res.sendStatus(500);
+      });
+  },
+
+  exportAll: (req, res) => {
+    const {_q, page, start, end} = req.query;
+    const startDate = start ? new Date(start) : new Date(2020, 10, 8);
+    const endDate = end ? new Date(end) : new Date();
+    startDate.setHours(0,0,0,0);
+    endDate.setHours(23,59,59,999);
+    collectionService.export(_q || '', startDate, endDate)
       .then(response => {
         logger.info(`200 OK. Request '${req.path}'.`);
         res.send(response);

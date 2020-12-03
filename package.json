@@ -24,6 +24,7 @@
         "accesscontrol": "^2.2.1",
         "bcrypt": "^5.0.0",
         "body-parser": "*",
+        "cors": "^2.8.5",
         "express": "*",
         "express-healthcheck": "*",
         "jsonwebtoken": "^8.5.1",

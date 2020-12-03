@@ -22,11 +22,11 @@ const CollectionSchema = new Schema({
     required: true,
   },
   anexaNum: {
-    type: Number,
+    type: String,
     required: true,
   },
   quantity: {
-    type: Number,
+    type: String,
     required: true,
   },
   person: {
