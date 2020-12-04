@@ -6,7 +6,7 @@ const User = require('./server/models/user');
 const jwt = require('jsonwebtoken');
 const app = express();
 
-app.set('port', process.env.PORT || 3088)
+app.set('port', process.env.PORT || 433)
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -40,8 +40,6 @@ app.use(async (req, res, next) => {
       return res.status(401).json({
         error: "JWT token has expired, please login to obtain a new one"
       });
-      console.log(error);
-      next(error);
     }
   } else {
     next();
