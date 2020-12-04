@@ -1,4 +1,4 @@
-const UserHandler = require('./handlers/userhandler');
+const UserHandler = require('./handlers/userHandler');
 
 module.exports = (router) => {
 
