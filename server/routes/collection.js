@@ -11,6 +11,8 @@ module.exports = router => {
 
   router.get('/collections', UserHandler.allowIfLoggedin, UserHandler.grantAccess('readAny', 'collection'), CollectionHandler.getAll);
 
+  router.get('/my-collections', UserHandler.allowIfLoggedin, UserHandler.grantAccess('readOwn', 'collection'), CollectionHandler.getMyCollections);
+
   router.get('/export-collections', UserHandler.allowIfLoggedin, UserHandler.grantAccess('readAny', 'collection'), CollectionHandler.exportAll);
 
   router.put('/collection/:collectionId', UserHandler.allowIfLoggedin, UserHandler.grantAccess('updateAny', 'collection'), CollectionHandler.update);

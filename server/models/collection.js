@@ -33,6 +33,10 @@ const CollectionSchema = new Schema({
     type: String,
     required: true,
   },
+  personId: {
+    type: String,
+    required: true,
+  },
   createdDate: { 
     type: Date, 
     default: Date.now 

@@ -3,8 +3,8 @@ const ac = new AccessControl();
 
 exports.roles = (function() {
   ac.grant("basic")
-    .readOwn("profile")
     .createOwn("collection")
+    .readOwn("collection")
 
   ac.grant("admin")
     .extend("basic")

@@ -15,8 +15,8 @@ module.exports = {
         "date": {"$gte": start, "$lt": end}
       })
         .sort({date: -1})
-        .skip(2 * page)
-        .limit(2)
+        .skip(50 * page)
+        .limit(50)
         .exec((err, result) => {
           if (err) {
             logger.error(`Error: ${err}. Stack: ${err.stack}`);

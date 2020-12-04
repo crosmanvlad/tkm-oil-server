@@ -44,7 +44,7 @@ module.exports = {
     const {date, firm, location, anexaNum, quantity} = req.body;
 
     if (date && firm && location && anexaNum && quantity) {
-      let collection = new Collection({date, firm, location, anexaNum, quantity, person: `${req.user.lastName} ${req.user.firstName}`});
+      let collection = new Collection({date, firm, location, anexaNum, quantity, personId: req.user.id, person: `${req.user.lastName} ${req.user.firstName}`});
 
       collection.save(err => {
         if (err) {
@@ -57,6 +57,19 @@ module.exports = {
     } else {
       logger.error(`400 Bad Request. Request '${req.path}'.`);
       res.sendStatus(400);
+    }
+  },
+
+  getMyCollections: async (req, res) => {
+    try {
+      const collections = await Collection
+        .find({personId: req.user.id})
+        .sort({date: -1})
+        .limit(50);
+      res.send(collections);
+    } catch(err) {
+      logger.error(`Error: ${err}. Stack: ${err.stack}`);
+      return res.sendStatus(500);
     }
   },
 
