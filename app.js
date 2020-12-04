@@ -6,7 +6,7 @@ const User = require('./server/models/user');
 const jwt = require('jsonwebtoken');
 const app = express();
 
-app.set('port', process.env.PORT || 443)
+app.set('port', process.env.PORT || 3088)
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
