@@ -14,7 +14,7 @@ module.exports = {
         }],
         "date": {"$gte": start, "$lt": end}
       })
-        .sort({date: -1})
+        .sort({date: -1, createdDate: -1})
         .skip(50 * page)
         .limit(50)
         .exec((err, result) => {
@@ -39,7 +39,7 @@ module.exports = {
         }],
         "date": {"$gte": start, "$lt": end}
       })
-        .sort({date: -1})
+        .sort({date: -1, createdDate: -1})
         .exec((err, result) => {
           if (err) {
             logger.error(`Error: ${err}. Stack: ${err.stack}`);
@@ -47,6 +47,22 @@ module.exports = {
           }
           resolve(result);
         })
+    })
+  },
+
+  getStats: (userId, start, end) => {
+    return new Promise((resolve, reject) => {
+      Collection.find({
+        personId: userId,
+        "date": {"$gte": start, "$lt": end}
+      }).exec((err, result) => {
+        if (err) {
+          reject(err);
+        }
+        console.log(result);
+        let sum = result.reduce((prev, curr) => prev + parseInt(curr.quantity), 0)
+        resolve(sum);
+      })
     })
   }
 };

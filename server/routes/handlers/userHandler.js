@@ -1,7 +1,9 @@
 const config = require('../../config');
 const User = require('../../models/user');
+const collectionService  = require('../../services/collection');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const logger = require('../../utils/logger');
 
 const { roles } = require('../../roles')
 
@@ -102,11 +104,46 @@ exports.getUser = async (req, res, next) => {
   }
 }
 
+exports.getUserStats = async (req, res, next) => {
+    const {start, end} = req.query;
+    if (!start || !end) {
+      res.sendStatus(400);
+    }
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const userId = req.params.userId;
+    collectionService.getStats(userId, startDate, endDate)
+      .then(response => {
+        res.status(200).json({
+          total: response
+        });
+      })
+      .catch(err => {
+        logger.error(`Error: ${err}. Stack: ${err.stack}`);
+        return res.sendStatus(500);
+      })
+}
+
 exports.updateUser = async (req, res, next) => {
   try {
-    const { role } = req.body
+    const { email, firstName, lastName, role } = req.body;
     const userId = req.params.userId;
-    await User.findByIdAndUpdate(userId, { role });
+    await User.findByIdAndUpdate(userId, { email, firstname, lastName, role });
+    const user = await User.findById(userId)
+    res.status(200).json({
+      data: user
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.updateUserPass = async (req, res, next) => {
+  try {
+    const { password } = req.body;
+    const userId = req.params.userId;
+    const hashedPassword = await hashPassword(password);
+    await User.findByIdAndUpdate(userId, { password: hashedPassword });
     const user = await User.findById(userId)
     res.status(200).json({
       data: user

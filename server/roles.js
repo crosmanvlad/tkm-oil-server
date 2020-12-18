@@ -14,6 +14,7 @@ exports.roles = (function() {
     .readAny("profile")
     .updateAny("profile")
     .deleteAny("profile")
+    .createAny("profile")
 
   return ac;
 })();
