@@ -128,7 +128,7 @@ exports.updateUser = async (req, res, next) => {
   try {
     const { email, firstName, lastName, role } = req.body;
     const userId = req.params.userId;
-    await User.findByIdAndUpdate(userId, { email, firstname, lastName, role });
+    await User.findByIdAndUpdate(userId, { email, firstName, lastName, role });
     const user = await User.findById(userId)
     res.status(200).json({
       data: user

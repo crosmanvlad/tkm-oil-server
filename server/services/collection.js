@@ -54,7 +54,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       Collection.find({
         personId: userId,
-        "date": {"$gte": start, "$lt": end}
+        "date": {"$gte": start, "$lte": end}
       }).exec((err, result) => {
         if (err) {
           reject(err);
